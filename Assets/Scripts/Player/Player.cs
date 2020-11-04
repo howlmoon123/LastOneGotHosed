@@ -1,17 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : SingletonMonobehaviour<Player>
 {
     // Movement Parameters
     private float xInput;
 
+    private bool isIdle;
+    private bool isRunning;
+    private bool isWalking;
+
     private float yInput;
     private Camera mainCamera;
     private Rigidbody2D rigidBody2D;
     private Direction playerDirection;
     private float movementSpeed;
+    private bool _playerInputIsDisabled = false;
+    public bool PlayerInputIsDisabled { get => _playerInputIsDisabled; set => _playerInputIsDisabled = value; }
 
     protected override void Awake()
     {
@@ -21,13 +25,139 @@ public class Player : SingletonMonobehaviour<Player>
         mainCamera = Camera.main;
     }
 
+    private void OnEnable()
+    {
+        EventHandler.BeforeSceneUnloadFadeOutEvent += DisablePlayerInput;
+        EventHandler.AfterSceneLoadFadeInEvent += EnablePlayerInput;
+    }
+
+    private void OnDisable()
+    {
+        EventHandler.BeforeSceneUnloadFadeOutEvent -= DisablePlayerInput;
+        EventHandler.AfterSceneLoadFadeInEvent -= EnablePlayerInput;
+    }
+
     private void Update()
     {
-        
+        #region PlayerInput
+        if (!PlayerInputIsDisabled)
+        {
+            PlayerMovementInput();
+
+            PlayerWalkInput();
+
+            //  PlayerClickInput();
+
+            PlayerTestInput();
+        }
+        #endregion
     }
 
     private void FixedUpdate()
     {
-        
+        PlayerMovement();
+
+    }
+
+    private void PlayerMovement()
+    {
+        Vector2 move = new Vector2(xInput * movementSpeed * Time.deltaTime, yInput * movementSpeed * Time.deltaTime);
+
+        rigidBody2D.MovePosition(rigidBody2D.position + move);
+    }
+
+    private void PlayerTestInput()
+    {
+
+    }
+
+    private void ResetMovement()
+    {
+        // Reset movement
+        xInput = 0f;
+        yInput = 0f;
+        isRunning = false;
+        isWalking = false;
+        isIdle = true;
+    }
+
+    private void PlayerWalkInput()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            isRunning = false;
+            isWalking = true;
+            isIdle = false;
+            movementSpeed = Settings.walkingSpeed;
+        }
+        else
+        {
+            isRunning = true;
+            isWalking = false;
+            isIdle = false;
+            movementSpeed = Settings.runningSpeed;
+        }
+    }
+
+    private void PlayerMovementInput()
+    {
+        yInput = Input.GetAxisRaw("Vertical");
+        xInput = Input.GetAxisRaw("Horizontal");
+
+        if (yInput != 0 && xInput != 0)
+        {
+            xInput = xInput * 0.71f;
+            yInput = yInput * 0.71f;
+        }
+
+        if (xInput != 0 || yInput != 0)
+        {
+            isRunning = true;
+            isWalking = false;
+            isIdle = false;
+            movementSpeed = Settings.runningSpeed;
+
+            // Capture player direction for save game
+            if (xInput < 0)
+            {
+                playerDirection = Direction.left;
+            }
+            else if (xInput > 0)
+            {
+                playerDirection = Direction.right;
+            }
+            else if (yInput < 0)
+            {
+                playerDirection = Direction.down;
+            }
+            else
+            {
+                playerDirection = Direction.up;
+            }
+        }
+        else if (xInput == 0 && yInput == 0)
+        {
+            isRunning = false;
+            isWalking = false;
+            isIdle = true;
+        }
+    }
+
+
+
+    public void DisablePlayerInput()
+    {
+        PlayerInputIsDisabled = true;
+    }
+
+    public void EnablePlayerInput()
+    {
+        PlayerInputIsDisabled = false;
+    }
+
+    public void DisablePlayerInputAndResetMovement()
+    {
+        DisablePlayerInput();
+        ResetMovement();
     }
 }
