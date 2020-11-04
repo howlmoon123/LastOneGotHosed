@@ -50,4 +50,7 @@ public static class Settings
     public const string Magic = "Magic";
     public const string Clerical = "Clerical";
     public const string Consumable = "Consumable";
+
+    // Time System
+    public const float secondsPerGameSecond = 0.012f;
 }
