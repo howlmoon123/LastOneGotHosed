@@ -46,5 +46,8 @@ public static class Settings
     public static int idleLeft;
     public static int idleRight;
 
-    
+    public const string Weapon = "Weapon";
+    public const string Magic = "Magic";
+    public const string Clerical = "Clerical";
+    public const string Consumable = "Consumable";
 }

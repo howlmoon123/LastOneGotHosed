@@ -254,36 +254,24 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>
     /// <summary>
     /// Get the item type description for an item type - returns the item type description as a string for a given ItemType
     /// </summary>
-/*
+
     public string GetItemTypeDescription(ItemType itemType)
     {
         string itemTypeDescription;
         switch (itemType)
         {
-            case ItemType.Breaking_tool:
-                itemTypeDescription = Settings.BreakingTool;
+            case ItemType.Weapon:
+                itemTypeDescription = Settings.Weapon;
                 break;
-
-            case ItemType.Chopping_tool:
-                itemTypeDescription = Settings.ChoppingTool;
+            case ItemType.Magic:
+                itemTypeDescription = Settings.Magic;
                 break;
-
-            case ItemType.Hoeing_tool:
-                itemTypeDescription = Settings.HoeingTool;
+            case ItemType.Clerical:
+                itemTypeDescription = Settings.Clerical;
                 break;
-
-            case ItemType.Reaping_tool:
-                itemTypeDescription = Settings.ReapingTool;
+            case ItemType.Consumable:
+                itemTypeDescription = Settings.Consumable;
                 break;
-
-            case ItemType.Watering_tool:
-                itemTypeDescription = Settings.WateringTool;
-                break;
-
-            case ItemType.Collecting_tool:
-                itemTypeDescription = Settings.CollectingTool;
-                break;
-
             default:
                 itemTypeDescription = itemType.ToString();
                 break;
@@ -291,7 +279,7 @@ public class InventoryManager : SingletonMonobehaviour<InventoryManager>
 
         return itemTypeDescription;
     }
-*/
+
     /// <summary>
     /// Remove an item from the inventory, and create a game object at the position it was dropped
     /// </summary>
