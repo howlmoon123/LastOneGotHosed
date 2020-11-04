@@ -5,14 +5,19 @@ public class Player : SingletonMonobehaviour<Player>
     // Movement Parameters
     private float xInput;
 
+
+#pragma warning disable CS0414 // Remove unread private members
     private bool isIdle;
+
     private bool isRunning;
     private bool isWalking;
+    private Direction playerDirection;
 
+#pragma warning restore CS0414 // Remove unread private members
     private float yInput;
     private Camera mainCamera;
     private Rigidbody2D rigidBody2D;
-    private Direction playerDirection;
+   
     private float movementSpeed;
     private bool _playerInputIsDisabled = false;
     public bool PlayerInputIsDisabled { get => _playerInputIsDisabled; set => _playerInputIsDisabled = value; }

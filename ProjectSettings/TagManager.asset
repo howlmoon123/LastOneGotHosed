@@ -45,3 +45,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground1
+    uniqueID: 3526498533
+    locked: 0
+  - name: Ground2
+    uniqueID: 174288337
+    locked: 0
+  - name: Collisions
+    uniqueID: 4136125859
+    locked: 0
+  - name: Instances
+    uniqueID: 1006604949
+    locked: 0
+  - name: Forward1
+    uniqueID: 2296108115
+    locked: 0
+  - name: Forward2
+    uniqueID: 2165777063
+    locked: 0
+  - name: Properties
+    uniqueID: 1930609275
+    locked: 0
