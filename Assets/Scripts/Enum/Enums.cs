@@ -1,4 +1,12 @@
-﻿public enum Direction
+﻿public enum GridBoolProperty
+{
+    diggable,
+    canDropItem,
+    canPlaceFurniture,
+    isPath,
+    isNPCObstacle
+}
+public enum Direction
 {
     up,
     down,
