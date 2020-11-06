@@ -187,7 +187,80 @@ public class AStar : MonoBehaviour
 
     private bool PopulateGridNodesFromGridPropertiesDictionary(SceneName sceneName, Vector2Int startGridPosition, Vector2Int endGridPosition)
     {
-       
+
+        // Get grid properties dictionary for the scene
+      //  SceneSave sceneSave;
+
+     //  if (GridPropertiesManager.Instance.GameObjectSave.sceneData.TryGetValue(sceneName.ToString(), out sceneSave))
+      // {
+            // Get Dict grid property details
+          //  if (sceneSave.gridPropertyDetailsDictionary != null)
+          //  {
+                // Get grid height and width
+                if (GridPropertiesManager.Instance.GetGridDimensions(sceneName, out Vector2Int gridDimensions, out Vector2Int gridOrigin))
+                {
+                    // Create nodes grid based on grid properties dictionary
+                    gridNodes = new GridNodes(gridDimensions.x, gridDimensions.y);
+                    gridWidth = gridDimensions.x;
+                    gridHeight = gridDimensions.y;
+                    originX = gridOrigin.x;
+                    originY = gridOrigin.y;
+
+                    // Create openNodeList
+                    openNodeList = new List<Node>();
+
+                    // Create closed Node List
+                    closedNodeList = new HashSet<Node>();
+                }
+                else
+                {
+                    return false;
+                }
+
+                // Populate start node
+                startNode = gridNodes.GetGridNode(startGridPosition.x - gridOrigin.x, startGridPosition.y - gridOrigin.y);
+
+                // Populate target node
+                targetNode = gridNodes.GetGridNode(endGridPosition.x - gridOrigin.x, endGridPosition.y - gridOrigin.y);
+
+                // populate obstacle and path info for grid
+                for (int x = 0; x < gridDimensions.x; x++)
+                {
+                    for (int y = 0; y < gridDimensions.y; y++)
+                    {
+                        GridPropertyDetails gridPropertyDetails = GridPropertiesManager.Instance.GetGridPropertyDetails(x + gridOrigin.x, y + gridOrigin.y, GridPropertiesManager.Instance.gridPropertyDictionary);
+
+                        if (gridPropertyDetails != null)
+                        {
+                            // If NPC obstacle
+                            if (gridPropertyDetails.isNPCObstacle == true)
+                            {
+                                Node node = gridNodes.GetGridNode(x, y);
+                                node.isObstacle = true;
+                            }
+                            else if (gridPropertyDetails.isPath == true)
+                            {
+                                Node node = gridNodes.GetGridNode(x, y);
+                                node.movementPenalty = pathMovementPenalty;
+                            }
+                            else
+                            {
+                                Node node = gridNodes.GetGridNode(x, y);
+                                node.movementPenalty = defaultMovementPenalty;
+                            }
+                        }
+                    }
+                }
+            
+           // else
+          //  {
+          //      return false;
+          //  }
+      //  }
+      // // else
+      //  {
+      //      return false;
+      //  }
 
         return true;
     }

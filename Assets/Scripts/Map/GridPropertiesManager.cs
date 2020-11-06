@@ -12,7 +12,7 @@ public class GridPropertiesManager : SingletonMonobehaviour<GridPropertiesManage
     private Tilemap groundDecoration2;
     private bool isFirstTimeSceneLoaded = true;
     private Grid grid;
-    private Dictionary<string, GridPropertyDetails> gridPropertyDictionary;
+    public Dictionary<string, GridPropertyDetails> gridPropertyDictionary;
    // [SerializeField] private SO_CropDetailsList so_CropDetailsList = null;
     [SerializeField] private SO_GridProperties[] so_gridPropertiesArray = null;
     [SerializeField] private Tile[] dugGround = null;

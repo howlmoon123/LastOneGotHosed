@@ -50,7 +50,7 @@ public class TilemapGridProperties : MonoBehaviour
             {
                 Vector3Int startCell = tilemap.cellBounds.min;
                 Vector3Int endCell = tilemap.cellBounds.max;
-
+               
                 for (int x = startCell.x; x < endCell.x; x++)
                 {
                     for (int y = startCell.y; y < endCell.y; y++)
@@ -59,7 +59,9 @@ public class TilemapGridProperties : MonoBehaviour
 
                         if (tile != null)
                         {
-                            gridProperties.gridPropertyList.Add(new GridProperty(new GridCoordinate(x, y), gridBoolProperty, true));
+                            GridCoordinate coordinate = new GridCoordinate(x, y);
+                            gridProperties.gridPropertyList.Add(new GridProperty(coordinate, gridBoolProperty, true));
+                            Debug.LogError("Start " + x + " End " + y + " GC " + coordinate);
                         }
                     }
                 }

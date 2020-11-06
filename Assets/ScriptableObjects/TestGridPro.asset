@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ce18f6d0ea14534c84d468c99b04f60, type: 3}
   m_Name: TestGridPro
   m_EditorClassIdentifier: 
-  sceneName: 0
-  gridWidth: -40
-  gridHeight: -30
-  originX: 81
-  originY: 61
+  sceneName: 2
+  gridWidth: 14
+  gridHeight: 19
+  originX: -7
+  originY: -5
   gridPropertyList:
   - gridCoordinate: {fileID: 0}
-    gridBoolProperty: 0
-    gridBoolValue: 0
+    gridBoolProperty: 1
+    gridBoolValue: 1
