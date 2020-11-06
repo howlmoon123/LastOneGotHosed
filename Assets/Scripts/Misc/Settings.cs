@@ -53,4 +53,7 @@ public static class Settings
 
     // Time System
     public const float secondsPerGameSecond = 0.012f;
+
+    //NPC Movement
+    public static float pixelSize = 0.0625f;
 }

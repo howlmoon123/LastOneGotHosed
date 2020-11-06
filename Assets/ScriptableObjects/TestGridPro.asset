@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: TestGridPro
   m_EditorClassIdentifier: 
   sceneName: 0
-  gridWidth: 0
-  gridHeight: 0
-  originX: 0
-  originY: 0
-  gridPropertyList: []
+  gridWidth: -40
+  gridHeight: -30
+  originX: 81
+  originY: 61
+  gridPropertyList:
+  - gridCoordinate: {fileID: 0}
+    gridBoolProperty: 0
+    gridBoolValue: 0
